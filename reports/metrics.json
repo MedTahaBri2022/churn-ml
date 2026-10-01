@@ -107,8 +107,8 @@
       "max_depth": 3
     },
     "threshold": 0.19,
-    "trained_at": "2026-10-01T20:09:28+00:00",
-    "git_revision": null,
+    "trained_at": "2026-10-01T20:17:21+00:00",
+    "git_revision": "f34f606",
     "data_sha256": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
     "rows": {
       "train": 5634,

@@ -1,7 +1,7 @@
 # Model card: customer churn classifier
 
 - **Model**: `gradient_boosting` {'learning_rate': 0.05, 'max_depth': 3}
-- **Trained**: 2026-10-01T20:09:28+00:00 (git `None`)
+- **Trained**: 2026-10-01T20:17:21+00:00 (git `f34f606`)
 - **Data**: 5634 training rows, 1409 test rows, churn rate 26.5%, sha256 `16320c9c1ec7`
 
 ## Model selection (5-fold cross-validation on the training split)
