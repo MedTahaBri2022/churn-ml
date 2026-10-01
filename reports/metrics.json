@@ -1,0 +1,145 @@
+{
+  "leaderboard_cv": [
+    {
+      "name": "baseline_prior",
+      "params": {},
+      "roc_auc": 0.4999033582991061,
+      "pr_auc": 0.2653155404866952,
+      "brier": 0.19494089017056604
+    },
+    {
+      "name": "logistic_regression",
+      "params": {
+        "C": 0.1
+      },
+      "roc_auc": 0.8476450572116004,
+      "roc_auc_std": 0.010990884877744668,
+      "pr_auc": 0.6609664506135984
+    },
+    {
+      "name": "random_forest",
+      "params": {
+        "max_depth": 10,
+        "min_samples_leaf": 20
+      },
+      "roc_auc": 0.8481407326381873,
+      "roc_auc_std": 0.009807222931283409,
+      "pr_auc": 0.6636259157915007
+    },
+    {
+      "name": "gradient_boosting",
+      "params": {
+        "learning_rate": 0.05,
+        "max_depth": 3
+      },
+      "roc_auc": 0.8487109262228524,
+      "roc_auc_std": 0.011029310571010354,
+      "pr_auc": 0.6679356087946474
+    }
+  ],
+  "test": {
+    "roc_auc": 0.8458898447389497,
+    "pr_auc": 0.6616829973366976,
+    "brier": 0.13523602505244353,
+    "threshold": 0.19,
+    "precision": 0.4603174603174603,
+    "recall": 0.8529411764705882,
+    "f1": 0.5979381443298969,
+    "expected_cost": 0.46061036195883603,
+    "confusion_matrix": {
+      "true_negative": 661,
+      "false_positive": 374,
+      "false_negative": 55,
+      "true_positive": 319
+    },
+    "default_threshold": {
+      "threshold": 0.5,
+      "precision": 0.6807017543859649,
+      "recall": 0.5187165775401069,
+      "f1": 0.5887708649468892,
+      "expected_cost": 0.7033356990773598,
+      "confusion_matrix": {
+        "true_negative": 944,
+        "false_positive": 91,
+        "false_negative": 180,
+        "true_positive": 194
+      }
+    }
+  },
+  "top_features": [
+    {
+      "feature": "Contract",
+      "roc_auc_drop": 0.08190188328295755
+    },
+    {
+      "feature": "tenure",
+      "roc_auc_drop": 0.06634529437598502
+    },
+    {
+      "feature": "InternetService",
+      "roc_auc_drop": 0.0094797075615491
+    },
+    {
+      "feature": "OnlineSecurity",
+      "roc_auc_drop": 0.005357152083494876
+    },
+    {
+      "feature": "TechSupport",
+      "roc_auc_drop": 0.005326151540985391
+    },
+    {
+      "feature": "PaymentMethod",
+      "roc_auc_drop": 0.003168255444470347
+    },
+    {
+      "feature": "MonthlyCharges",
+      "roc_auc_drop": 0.0024746183058204307
+    },
+    {
+      "feature": "StreamingMovies",
+      "roc_auc_drop": 0.0015518354904545007
+    }
+  ],
+  "metadata": {
+    "model_name": "gradient_boosting",
+    "params": {
+      "learning_rate": 0.05,
+      "max_depth": 3
+    },
+    "threshold": 0.19,
+    "trained_at": "2026-10-01T20:09:28+00:00",
+    "git_revision": null,
+    "data_sha256": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+    "rows": {
+      "train": 5634,
+      "test": 1409
+    },
+    "churn_rate": 0.2653698707936959,
+    "features": [
+      "tenure",
+      "MonthlyCharges",
+      "TotalCharges",
+      "gender",
+      "SeniorCitizen",
+      "Partner",
+      "Dependents",
+      "PhoneService",
+      "MultipleLines",
+      "InternetService",
+      "OnlineSecurity",
+      "OnlineBackup",
+      "DeviceProtection",
+      "TechSupport",
+      "StreamingTV",
+      "StreamingMovies",
+      "Contract",
+      "PaperlessBilling",
+      "PaymentMethod"
+    ],
+    "seed": 42,
+    "versions": {
+      "python": "3.13.2",
+      "scikit_learn": "1.9.1"
+    }
+  }
+}

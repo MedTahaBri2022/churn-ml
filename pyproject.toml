@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "churn"
+version = "1.0.0"
+description = "End-to-end churn prediction: training, tracking, serving and drift monitoring"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "scikit-learn>=1.5,<2",
+    "pandas>=2.2,<3",
+    "numpy>=1.26",
+    "joblib>=1.4",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.7,<3",
+    "prometheus-client>=0.20",
+    "mlflow-skinny>=2.16",
+    "sqlalchemy>=2",
+    "alembic>=1.13",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]

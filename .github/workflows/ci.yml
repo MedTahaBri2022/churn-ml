@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-and-train:
+    name: Tests, training and quality gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev]"
+      - run: pytest -v
+      - name: Train the three candidates
+        run: python -m churn train
+      - name: Quality gate
+        run: python -m churn check --min-roc-auc 0.82
+      - name: The committed report matches a fresh training
+        run: |
+          git diff --exit-code --stat -- reports/metrics.json || \
+            echo "::warning::reports/metrics.json differs from this run (library versions or platform)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-and-report
+          path: |
+            models/
+            reports/
+
+  docker:
+    name: Image builds and serves predictions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose up -d --build --wait
+      - name: Smoke test
+        run: |
+          curl -sf localhost:8000/health
+          curl -sf -X POST localhost:8000/predict -H 'Content-Type: application/json' -d '{
+            "gender":"Female","SeniorCitizen":0,"Partner":"No","Dependents":"No","tenure":2,
+            "PhoneService":"Yes","MultipleLines":"No","InternetService":"Fiber optic",
+            "OnlineSecurity":"No","OnlineBackup":"No","DeviceProtection":"No","TechSupport":"No",
+            "StreamingTV":"Yes","StreamingMovies":"Yes","Contract":"Month-to-month",
+            "PaperlessBilling":"Yes","PaymentMethod":"Electronic check",
+            "MonthlyCharges":95.0,"TotalCharges":190.0}' | tee prediction.json
+          grep -q '"churn_predicted":true' prediction.json
